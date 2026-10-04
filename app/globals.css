@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    background-color: #070b1f;
+    color: #eef2ff;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #8b5cf6;
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #22d3ee;
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .text-gradient {
+    background-image: linear-gradient(90deg, #22d3ee, #818cf8 30%, #c084fc 55%, #f472b6 78%, #fbbf24);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-soft {
+    background-image: linear-gradient(90deg, #ffffff, #c7d2fe 60%, #a5f3fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .grid-bg {
+    background-image: linear-gradient(rgba(148, 163, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 255, 0.08) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 25%, transparent 72%);
+    mask-image: radial-gradient(ellipse at center, #000 25%, transparent 72%);
+  }
+
+  .dot-bg {
+    background-image: radial-gradient(rgba(91, 33, 182, 0.14) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  /* 1px gradient outline that follows the element's radius */
+  .gradient-ring {
+    position: relative;
+  }
+  .gradient-ring::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.7), rgba(139, 92, 246, 0.6), rgba(244, 114, 182, 0.7));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-700 via-violet-600 to-fuchsia-600 px-6 py-3 text-[15px] font-bold text-white shadow-[0_0_32px_rgba(139,92,246,0.45)] transition hover:-translate-y-0.5 hover:shadow-[0_0_44px_rgba(236,72,153,0.5)];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-[15px] font-bold text-white transition hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10;
+  }
+
+  .contact-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-bold text-white transition hover:border-cyan-300/60 hover:bg-cyan-300/10;
+  }
+
+  .eyebrow-dark {
+    @apply inline-flex items-center gap-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-cyan-300;
+  }
+
+  .eyebrow-light {
+    @apply inline-flex items-center gap-2 rounded-full border border-violet-600/20 bg-violet-600/10 px-3.5 py-1 font-mono text-xs font-medium uppercase tracking-[0.18em] text-violet-700;
+  }
+}
+
+/* Prototype illustration */
+.proto-float {
+  animation: proto-float 7s ease-in-out infinite;
+}
+.proto-led {
+  animation: proto-blink 1.8s ease-in-out infinite;
+}
+.proto-twinkle {
+  animation: proto-blink 3.2s ease-in-out infinite both;
+}
+.proto-wave {
+  animation: proto-wave 2.4s ease-out infinite both;
+}
+.proto-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: proto-ping 2.4s cubic-bezier(0.2, 0.6, 0.3, 1) infinite both;
+}
+
+@keyframes proto-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+@keyframes proto-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+@keyframes proto-wave {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes proto-ping {
+  0% {
+    transform: scale(0.4);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.3);
+    opacity: 0;
+  }
+}
+
+/* Sections rise in as they scroll into view, where the browser supports scroll-driven animation */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 22%;
+  }
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(36px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
