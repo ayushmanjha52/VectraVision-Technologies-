@@ -35,7 +35,7 @@ export function Difference() {
             <div className="mt-4">
               <MotionSensorMock />
             </div>
-            <p className="mt-4 leading-relaxed text-white/70">It knows something moved. It can’t tell you what.</p>
+            <p className="mt-4 leading-relaxed text-white/70">It knows something moved. It can&apos;t tell you what.</p>
           </div>
           <div className="gradient-ring rounded-3xl bg-white/[0.04] p-5 shadow-[0_0_70px_rgba(139,92,246,0.28)] sm:p-6 lg:col-span-3">
             <LiveSignature targets={targets} />

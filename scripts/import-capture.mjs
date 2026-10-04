@@ -18,7 +18,7 @@
  *   --flip        Doppler runs positive to negative (default assumes negative to positive)
  *   --power       input is power, not magnitude
  *   --range-db    dynamic range kept below the peak (default 40)
- *   --crop        central fraction of the Doppler axis to keep, 0–1 (default 1)
+ *   --crop        central fraction of the Doppler axis to keep, 0 to 1 (default 1)
  *
  * Output is normalised, cropped and resampled to a fixed 240 x 96 grid, so the original Doppler scale,
  * FFT size and frame rate can't be recovered from what gets published. Writes:

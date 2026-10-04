@@ -50,7 +50,7 @@ export const signatureTargets = [
     id: 'person-walking',
     label: 'Person walking',
     color: '#22D3EE',
-    caption: 'Swinging arms and legs wrap the body’s trace in a steady rhythm.',
+    caption: "Swinging arms and legs wrap the body's trace in a steady rhythm.",
   },
   {
     id: 'person-crawling',

@@ -10,7 +10,7 @@ export default function NotFound() {
         <p className="font-display text-8xl font-bold">
           <span className="text-gradient">404</span>
         </p>
-        <h1 className="mt-6 font-display text-3xl font-semibold text-white">This page doesn’t exist.</h1>
+        <h1 className="mt-6 font-display text-3xl font-semibold text-white">This page doesn&apos;t exist.</h1>
         <p className="mt-3 text-lg text-haze">Spandan, on the other hand, is coming soon.</p>
         <Link href="/" className="btn-primary mt-9">
           Back to home

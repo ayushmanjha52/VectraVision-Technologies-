@@ -13,7 +13,7 @@ const features = [
   {
     Icon: DroneIcon,
     title: 'Spots the payload',
-    body: 'Knows a drone carrying a load from one that isn’t.',
+    body: "Knows a drone carrying a load from one that isn't.",
     accent: 'from-violet-300 to-fuchsia-500',
   },
   {

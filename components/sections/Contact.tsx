@@ -17,7 +17,7 @@ export function Contact() {
           id="contact-title"
           align="center"
           eyebrow="Contact"
-          title={<span className="text-gradient animate-gradient-x">Let’s talk.</span>}
+          title={<span className="text-gradient animate-gradient-x">Let&apos;s talk.</span>}
           lead="Spandan is coming soon. For questions, partnerships or pilots, reach the founders directly."
         />
 
