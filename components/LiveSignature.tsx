@@ -11,12 +11,12 @@ const AUTO_CYCLE_MS = 5200
 
 // Colour scale; keep in sync with scripts/import-capture.mjs
 const STOPS: ReadonlyArray<readonly [number, readonly [number, number, number]]> = [
-  [0, [7, 11, 31]],
-  [0.22, [30, 27, 107]],
-  [0.45, [124, 58, 237]],
-  [0.68, [236, 72, 153]],
-  [0.88, [251, 191, 36]],
-  [1, [254, 243, 199]],
+  [0, [10, 10, 9]],
+  [0.2, [52, 14, 10]],
+  [0.42, [150, 36, 14]],
+  [0.62, [255, 91, 34]],
+  [0.82, [255, 181, 71]],
+  [1, [255, 244, 214]],
 ]
 
 function buildLut(): Uint8ClampedArray {
@@ -228,15 +228,15 @@ export function LiveSignature({ targets }: { targets: SignatureTarget[] }) {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-cyan-300">Spandan view</p>
-        <p className="rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-white/70">
+        <p className="label !text-ember">Spandan view</p>
+        <p className="label rounded-full border border-line px-3 py-1">
           {real && current.capture ? `Lab capture, ${formatDate(current.capture.date)}` : 'Simulation'}
         </p>
       </div>
 
       <div
         ref={wrapRef}
-        className="relative mt-4 aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 bg-night sm:aspect-[2/1]"
+        className="relative mt-4 aspect-[16/10] overflow-hidden rounded-xl border border-line bg-ink sm:aspect-[2/1]"
       >
         <canvas
           ref={canvasRef}
@@ -244,14 +244,11 @@ export function LiveSignature({ targets }: { targets: SignatureTarget[] }) {
           aria-label={`${real ? 'Lab capture of the' : 'Simulated'} micro-Doppler signature of a ${current.label.toLowerCase()}`}
           className="absolute inset-0 h-full w-full"
         />
-        <div className="absolute left-3 top-3 flex items-center gap-2 rounded-full border border-white/15 bg-night/75 px-3 py-1.5 backdrop-blur">
-          <span
-            className="h-2.5 w-2.5 rounded-full"
-            style={{ backgroundColor: current.color, boxShadow: `0 0 12px ${current.color}` }}
-          />
-          <span className="text-sm font-bold text-white">{current.label}</span>
+        <div className="absolute left-3 top-3 flex items-center gap-2 rounded-full border border-line bg-ink/80 px-3 py-1.5 backdrop-blur">
+          <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: current.color }} />
+          <span className="text-sm font-semibold text-paper">{current.label}</span>
         </div>
-        <span className="absolute bottom-2.5 right-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">
+        <span className="absolute bottom-2.5 right-3 font-mono text-[10px] uppercase tracking-[0.2em] text-paper/45">
           Time
         </span>
       </div>
@@ -266,10 +263,10 @@ export function LiveSignature({ targets }: { targets: SignatureTarget[] }) {
               setSelected(i)
               setAutoCycle(false)
             }}
-            className={`flex items-center gap-2 rounded-xl border px-3 py-2.5 text-left text-sm font-bold transition ${
+            className={`flex items-center gap-2 rounded-lg border px-3 py-2.5 text-left text-sm font-semibold transition-colors ${
               i === selected
-                ? 'border-white/30 bg-white/10 text-white'
-                : 'border-white/10 bg-white/[0.03] text-white/60 hover:border-white/20 hover:text-white'
+                ? 'border-paper/50 bg-char text-paper'
+                : 'border-line text-stone hover:border-paper/30 hover:text-paper'
             }`}
           >
             <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: target.color }} />
@@ -278,7 +275,7 @@ export function LiveSignature({ targets }: { targets: SignatureTarget[] }) {
         ))}
       </div>
 
-      <p aria-live="polite" className="mt-4 min-h-[3.5rem] text-white/85">
+      <p aria-live="polite" className="mt-5 min-h-[3.5rem] font-display text-xl leading-snug text-paper sm:text-2xl">
         {current.caption}
       </p>
     </div>

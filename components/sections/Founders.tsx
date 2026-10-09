@@ -7,67 +7,59 @@ import { findTeamPhoto } from '@/lib/team'
 
 export function Founders() {
   return (
-    <section id="founders" aria-labelledby="founders-title" className="relative scroll-mt-16 overflow-hidden py-24 sm:py-32">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-32 top-32 h-[480px] w-[480px] rounded-full bg-cyan-500/20 blur-[140px]" />
-        <div className="absolute -right-32 bottom-10 h-[480px] w-[480px] rounded-full bg-pink-500/20 blur-[140px]" />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="founders" aria-labelledby="founders-title" className="relative scroll-mt-16 bg-coal py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="founders-title"
-          align="center"
+          index="04"
           eyebrow="The founders"
           title={
             <>
-              The people behind <span className="text-gradient">Spandan.</span>
+              The people behind <em className="italic text-ember">Spandan.</em>
             </>
           }
           lead="Founded in 2026 at BIT Sindri, Dhanbad. Our team works across signal processing, AI, electronics and mechanical design."
         />
 
-        <ul className="reveal mx-auto mt-14 grid max-w-4xl gap-8 sm:grid-cols-2">
-          {founders.map((founder) => {
+        <ul className="reveal mt-16 grid gap-12 sm:grid-cols-2 lg:ml-[calc(25%+0.5rem)] lg:gap-10">
+          {founders.map((founder, i) => {
             const photo = findTeamPhoto(founder.slug)
             return (
-              <li
-                key={founder.slug}
-                className="gradient-ring rounded-[28px] bg-white/[0.04] p-3 transition hover:-translate-y-1 hover:shadow-[0_0_60px_rgba(139,92,246,0.3)]"
-              >
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] bg-deep">
+              <li key={founder.slug} className={`group ${i % 2 ? 'sm:mt-20' : ''}`}>
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-char">
                   {photo ? (
                     <Image
                       src={photo}
                       alt={`${founder.name}, ${founder.role}`}
                       fill
-                      sizes="(min-width: 640px) 430px, 100vw"
-                      className="object-cover"
+                      sizes="(min-width: 1024px) 420px, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     />
                   ) : (
-                    <span className="flex h-full items-center justify-center font-display text-6xl font-bold text-white/25">
+                    <span className="flex h-full items-center justify-center font-display text-7xl text-paper/25">
                       {founder.name
                         .split(' ')
                         .map((part) => part[0])
                         .join('')}
                     </span>
                   )}
-                  <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-night/85 to-transparent" />
                 </div>
-                <div className="px-3 pb-3 pt-5">
-                  <h3 className="font-display text-2xl font-semibold text-white">{founder.name}</h3>
-                  <p className="mt-1 font-semibold text-cyan-300">{founder.role}</p>
-                  <div className="mt-5 grid gap-2">
-                    <a href={`mailto:${founder.email}`} className="contact-pill min-w-0 justify-start !rounded-xl">
-                      <MailIcon className="h-4 w-4 shrink-0 text-pink-300" />
-                      <span className="sr-only">Email </span>
-                      <span className="break-all">{founder.email}</span>
-                    </a>
-                    <a href={telHref(founder.phone)} className="contact-pill justify-start !rounded-xl">
-                      <PhoneIcon className="h-4 w-4 shrink-0 text-pink-300" />
-                      <span className="sr-only">Phone </span>
-                      <span className="tabular-nums">{founder.phone}</span>
-                    </a>
-                  </div>
+                <div className="mt-6 flex items-baseline justify-between gap-4 border-b border-line pb-4">
+                  <h3 className="font-display text-4xl leading-none text-paper">{founder.name}</h3>
+                  <span className="font-mono text-xs text-ash">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <p className="label mt-4 !text-ember">{founder.role}</p>
+                <div className="mt-5 grid gap-2.5 text-[15px]">
+                  <a href={`mailto:${founder.email}`} className="flex min-w-0 items-center gap-3 text-stone hover:text-paper">
+                    <MailIcon className="h-4 w-4 shrink-0 text-ember" />
+                    <span className="sr-only">Email </span>
+                    <span className="link-draw break-all">{founder.email}</span>
+                  </a>
+                  <a href={telHref(founder.phone)} className="flex items-center gap-3 text-stone hover:text-paper">
+                    <PhoneIcon className="h-4 w-4 shrink-0 text-ember" />
+                    <span className="sr-only">Phone </span>
+                    <span className="link-draw tabular-nums">{founder.phone}</span>
+                  </a>
                 </div>
               </li>
             )

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import type { ReactNode } from 'react'
-import { JetBrains_Mono, Manrope, Unbounded } from 'next/font/google'
+import { IBM_Plex_Mono, Instrument_Sans, Instrument_Serif } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
@@ -8,9 +8,15 @@ import { company, founders, product } from '@/content/site'
 import { siteUrl } from '@/lib/site-url'
 import './globals.css'
 
-const unbounded = Unbounded({ subsets: ['latin'], variable: '--font-unbounded', display: 'swap' })
-const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope', display: 'swap' })
-const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
+const serif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  display: 'swap',
+})
+const sans = Instrument_Sans({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
+const mono = IBM_Plex_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-mono', display: 'swap' })
 
 const title = `${product.name} by VectraVision Technologies | Coming soon`
 const description = `${product.name} is an indigenous multistatic radar with micro-motion analysis by VectraVision Technologies. It tells a walking person from a crawling one, and a loaded drone from an empty one. Coming soon for border security and mine safety.`
@@ -34,7 +40,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#070B1F',
+  themeColor: '#0A0A09',
   colorScheme: 'dark',
 }
 
@@ -52,9 +58,8 @@ const organisation = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-IN" className={`${unbounded.variable} ${manrope.variable} ${mono.variable}`}>
-      <body className="bg-night font-sans text-white antialiased">
-        <div aria-hidden="true" className="h-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-pink-500" />
+    <html lang="en-IN" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
+      <body className="grain bg-ink font-sans text-paper antialiased">
         <Header />
         <main>{children}</main>
         <Footer />

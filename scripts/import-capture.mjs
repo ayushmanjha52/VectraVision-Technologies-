@@ -38,12 +38,12 @@ const PNG_SCALE = 3
 const TARGETS = ['person-walking', 'person-crawling', 'drone-no-payload', 'drone-payload']
 // Keep in sync with components/LiveSignature.tsx
 const STOPS = [
-  [0, [7, 11, 31]],
-  [0.22, [30, 27, 107]],
-  [0.45, [124, 58, 237]],
-  [0.68, [236, 72, 153]],
-  [0.88, [251, 191, 36]],
-  [1, [254, 243, 199]],
+  [0, [10, 10, 9]],
+  [0.2, [52, 14, 10]],
+  [0.42, [150, 36, 14]],
+  [0.62, [255, 91, 34]],
+  [0.82, [255, 181, 71]],
+  [1, [255, 244, 214]],
 ]
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')

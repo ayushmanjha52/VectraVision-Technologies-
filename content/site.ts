@@ -49,25 +49,25 @@ export const signatureTargets = [
   {
     id: 'person-walking',
     label: 'Person walking',
-    color: '#22D3EE',
+    color: '#F1ECE3',
     caption: "Swinging arms and legs wrap the body's trace in a steady rhythm.",
   },
   {
     id: 'person-crawling',
     label: 'Person crawling',
-    color: '#A78BFA',
+    color: '#FFB547',
     caption: 'Slow and low. The kind of movement that is easy to miss.',
   },
   {
     id: 'drone-no-payload',
     label: 'Drone',
-    color: '#F472B6',
+    color: '#8FB3FF',
     caption: 'Spinning rotor blades flash right across the signature.',
   },
   {
     id: 'drone-payload',
     label: 'Drone with payload',
-    color: '#FBBF24',
+    color: '#FF5B22',
     caption: 'The rotors work harder and the load sways. Spandan spots the difference.',
   },
 ]

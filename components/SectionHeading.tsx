@@ -2,36 +2,34 @@ import type { ReactNode } from 'react'
 
 export function SectionHeading({
   id,
+  index,
   eyebrow,
   title,
   lead,
-  tone = 'dark',
-  align = 'left',
 }: {
   id: string
+  index: string
   eyebrow: string
   title: ReactNode
   lead?: ReactNode
-  tone?: 'dark' | 'light'
-  align?: 'left' | 'center'
 }) {
-  const dark = tone === 'dark'
   return (
-    <div className={align === 'center' ? 'mx-auto max-w-3xl text-center' : 'max-w-3xl'}>
-      <p className={dark ? 'eyebrow-dark' : 'eyebrow-light'}>{eyebrow}</p>
-      <h2
-        id={id}
-        tabIndex={-1}
-        data-section-heading
-        className={`mt-5 font-display text-[28px] font-semibold leading-[1.15] tracking-tight focus:outline-none sm:text-4xl lg:text-[44px] ${
-          dark ? 'text-white' : 'text-ink'
-        }`}
-      >
-        {title}
-      </h2>
-      {lead ? (
-        <p className={`mt-5 text-lg leading-relaxed ${dark ? 'text-haze' : 'text-slate-600'}`}>{lead}</p>
-      ) : null}
+    <div className="grid gap-6 border-t border-line pt-6 lg:grid-cols-12 lg:gap-8">
+      <p className="label flex gap-3 lg:col-span-3">
+        <span className="text-ember">{index}</span>
+        {eyebrow}
+      </p>
+      <div className="lg:col-span-9">
+        <h2
+          id={id}
+          tabIndex={-1}
+          data-section-heading
+          className="font-display text-[44px] leading-[0.98] tracking-[-0.01em] text-paper focus:outline-none sm:text-6xl lg:text-[76px]"
+        >
+          {title}
+        </h2>
+        {lead ? <p className="mt-6 max-w-2xl text-lg leading-relaxed text-stone">{lead}</p> : null}
+      </div>
     </div>
   )
 }

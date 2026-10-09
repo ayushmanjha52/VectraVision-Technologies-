@@ -5,40 +5,39 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        night: '#070B1F',
-        deep: '#0D1333',
-        ink: '#0B1026',
-        mist: '#F4F6FF',
-        haze: '#A3ADD3',
+        ink: '#0A0A09',
+        coal: '#121210',
+        char: '#1A1917',
+        line: '#2A2824',
+        paper: '#F1ECE3',
+        stone: '#A39E94',
+        ash: '#8A857B',
+        ember: '#FF5B22',
+        amber: '#FFB547',
       },
       fontFamily: {
-        display: ['var(--font-unbounded)', 'system-ui', 'sans-serif'],
-        sans: ['var(--font-manrope)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-serif)', 'Georgia', 'serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       keyframes: {
-        'gradient-x': {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
         marquee: {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-50%)' },
         },
         'word-in': {
-          '0%': { transform: 'translateY(70%)', opacity: '0', filter: 'blur(6px)' },
-          '100%': { transform: 'translateY(0)', opacity: '1', filter: 'blur(0)' },
+          '0%': { transform: 'translateY(60%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-12px)' },
+        blink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.2' },
         },
       },
       animation: {
-        'gradient-x': 'gradient-x 5s ease infinite',
-        marquee: 'marquee 38s linear infinite',
-        'word-in': 'word-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both',
-        float: 'float 7s ease-in-out infinite',
+        marquee: 'marquee 42s linear infinite',
+        'word-in': 'word-in 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both',
+        blink: 'blink 1.6s ease-in-out infinite',
       },
     },
   },

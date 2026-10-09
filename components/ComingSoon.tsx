@@ -14,20 +14,17 @@ export function ComingSoon() {
   }, [])
 
   return (
-    <div className="mt-6">
+    <div className="mt-8">
       <p className="sr-only">Coming soon for border security, mine safety and critical sites.</p>
-      <div aria-hidden="true">
-        <p className="flex items-center gap-4 font-display text-[34px] font-extrabold uppercase leading-none tracking-tight sm:text-5xl lg:text-[56px]">
-          <span className="text-gradient animate-gradient-x">Coming soon</span>
-          <span className="relative mt-1 flex h-3.5 w-3.5 shrink-0">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink-400 opacity-70" />
-            <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-pink-400" />
-          </span>
+      <div aria-hidden="true" className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <p className="flex items-center gap-3 font-display text-[44px] italic leading-none text-ember sm:text-6xl lg:text-[68px]">
+          Coming soon
+          <span className="mt-2 h-3 w-3 shrink-0 animate-blink rounded-full bg-ember" />
         </p>
-        <p className="mt-4 flex items-baseline gap-2 text-xl text-white/85 sm:text-2xl">
+        <p className="flex items-baseline gap-2 text-lg text-stone sm:text-xl">
           <span>for</span>
           <span className="relative inline-flex overflow-hidden">
-            <span key={index} className="animate-word-in font-bold text-cyan-300">
+            <span key={index} className="animate-word-in font-display text-2xl italic text-paper sm:text-[28px]">
               {PLACES[index]}
             </span>
           </span>

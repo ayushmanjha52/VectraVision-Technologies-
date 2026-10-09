@@ -2,57 +2,74 @@ import { ComingSoon } from '@/components/ComingSoon'
 import { ArrowIcon } from '@/components/icons'
 import { PrototypeArt } from '@/components/PrototypeArt'
 import { ScrollButton } from '@/components/ScrollButton'
-import { product } from '@/content/site'
+import { backing, company, product } from '@/content/site'
+
+const facts = [
+  { label: 'Made in', value: 'India, indigenous design' },
+  { label: 'Built for', value: 'Border security and mine safety' },
+  { label: 'Backed by', value: backing.backedBy.map((item) => item.name).join(' and ') },
+]
 
 export function Hero() {
   return (
     <section aria-labelledby="hero-title" className="relative overflow-hidden">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-40 -top-40 h-[560px] w-[560px] rounded-full bg-cyan-500/25 blur-[140px]" />
-        <div className="absolute -right-24 top-[8%] h-[640px] w-[640px] rounded-full bg-violet-600/35 blur-[150px]" />
-        <div className="absolute -bottom-48 left-[28%] h-[520px] w-[520px] rounded-full bg-pink-500/20 blur-[150px]" />
-        <div className="grid-bg absolute inset-0" />
+        <div className="hairline-grid absolute inset-0 [mask-image:radial-gradient(ellipse_at_70%_40%,#000_10%,transparent_65%)]" />
+        <div className="absolute right-[-10%] top-[10%] h-[560px] w-[560px] rounded-full bg-ember/[0.13] blur-[130px]" />
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 pb-20 pt-12 sm:px-6 lg:min-h-[calc(100vh-72px)] lg:grid-cols-2 lg:gap-4 lg:px-8 lg:pb-24 lg:pt-8">
-        <div className="relative z-10">
-          <p className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-semibold text-white/90 backdrop-blur">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-            </span>
-            Indigenous radar for a safer India
-          </p>
-          <p className="mt-8 font-mono text-sm font-medium uppercase tracking-[0.3em] text-cyan-300">VectraVision presents</p>
-          <h1
-            id="hero-title"
-            className="text-gradient-soft mt-3 font-display text-[58px] font-bold leading-none tracking-tight sm:text-8xl lg:text-[108px]"
-          >
-            {product.name}
-          </h1>
-          <p className="mt-4 font-display text-lg font-medium text-white/90 sm:text-xl">{product.descriptor}</p>
-          <ComingSoon />
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-haze">
-            <span className="font-bold text-white">{product.tagline}</span> A smart multistatic radar that tells a walking
-            person from a crawling one, and a loaded drone from an empty one.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-4">
-            <ScrollButton to="product" className="btn-primary">
-              Explore Spandan <ArrowIcon className="h-4 w-4" />
-            </ScrollButton>
-            <ScrollButton to="founders" className="btn-secondary">
-              Meet the founders
-            </ScrollButton>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between border-b border-line py-4">
+          <p className="label">{company.shortName} presents</p>
+          <p className="label">Est. 2026, Dhanbad</p>
+        </div>
+
+        <div className="grid items-center gap-6 pb-14 pt-10 lg:min-h-[calc(100vh-200px)] lg:grid-cols-12 lg:gap-4 lg:pb-16 lg:pt-6">
+          <div className="relative z-10 lg:col-span-7">
+            <h1
+              id="hero-title"
+              className="font-display text-[96px] leading-[0.82] tracking-[-0.02em] text-paper sm:text-[150px] lg:text-[184px]"
+            >
+              {product.name}
+              <span aria-hidden="true" className="text-ember">
+                .
+              </span>
+            </h1>
+            <p className="mt-6 max-w-md text-lg text-stone sm:text-xl">{product.descriptor}</p>
+            <ComingSoon />
+            <p className="mt-8 max-w-xl text-[17px] leading-relaxed text-stone">
+              <span className="font-semibold text-paper">{product.tagline}</span> A smart multistatic radar that tells a
+              walking person from a crawling one, and a loaded drone from an empty one.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <ScrollButton to="product" className="btn-primary">
+                Explore Spandan <ArrowIcon className="h-4 w-4" />
+              </ScrollButton>
+              <ScrollButton to="founders" className="btn-secondary">
+                Meet the founders
+              </ScrollButton>
+            </div>
+          </div>
+
+          <div className="relative lg:col-span-5">
+            <PrototypeArt idPrefix="hero" className="relative w-full lg:scale-[1.12]" />
+            <p className="label absolute bottom-0 right-2 rounded-full border border-line bg-ink/80 px-3 py-1 !text-[10px]">
+              Concept illustration
+            </p>
           </div>
         </div>
 
-        <div className="relative">
-          <div aria-hidden="true" className="absolute inset-[14%] rounded-full bg-violet-600/35 blur-[90px]" />
-          <PrototypeArt idPrefix="hero" className="relative w-full lg:translate-x-6 lg:scale-[1.15]" />
-          <p className="absolute bottom-0 right-2 rounded-full border border-white/10 bg-night/70 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/60 backdrop-blur">
-            Concept illustration
-          </p>
-        </div>
+        <dl className="grid border-t border-line sm:grid-cols-3">
+          {facts.map((fact, i) => (
+            <div
+              key={fact.label}
+              className={`py-5 sm:py-6 ${i > 0 ? 'border-t border-line sm:border-l sm:border-t-0 sm:pl-6' : ''}`}
+            >
+              <dt className="label">{fact.label}</dt>
+              <dd className="mt-1.5 font-display text-2xl text-paper">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   )

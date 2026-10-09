@@ -1,5 +1,4 @@
 import { ArrowIcon, ChipIcon, DroneIcon, MountainIcon, NodesIcon, ScanIcon, ShieldIcon } from '@/components/icons'
-import { PrototypeArt } from '@/components/PrototypeArt'
 import { ScrollButton } from '@/components/ScrollButton'
 import { SectionHeading } from '@/components/SectionHeading'
 
@@ -8,25 +7,21 @@ const features = [
     Icon: ScanIcon,
     title: 'Classifies, not just detects',
     body: 'Person walking, person crawling or drone. Spandan tells them apart.',
-    accent: 'from-cyan-300 to-sky-500',
   },
   {
     Icon: DroneIcon,
     title: 'Spots the payload',
     body: "Knows a drone carrying a load from one that isn't.",
-    accent: 'from-violet-300 to-fuchsia-500',
   },
   {
     Icon: NodesIcon,
     title: 'Three nodes, one picture',
     body: 'Separate nodes watch from different angles, so less slips past.',
-    accent: 'from-pink-300 to-rose-500',
   },
   {
     Icon: ChipIcon,
     title: 'AI at the edge',
     body: 'Processing happens on site. No cloud, no network needed.',
-    accent: 'from-amber-200 to-orange-500',
   },
 ]
 
@@ -43,74 +38,82 @@ const useCases = [
   },
 ]
 
+/** Range rings radiating from one corner, drawn in the banner's ink colour. */
+function Rings() {
+  return (
+    <svg viewBox="0 0 600 600" className="h-full w-full" aria-hidden="true">
+      <g fill="none" stroke="#0A0A09">
+        {[90, 170, 250, 330, 410, 490].map((r, i) => (
+          <circle key={r} cx="600" cy="600" r={r} strokeOpacity={0.5 - i * 0.07} strokeDasharray={i % 2 ? '2 8' : undefined} />
+        ))}
+        <line x1="600" y1="600" x2="180" y2="260" strokeOpacity="0.35" />
+        <line x1="600" y1="600" x2="330" y2="110" strokeOpacity="0.2" />
+      </g>
+      <circle cx="292" cy="350" r="7" fill="#0A0A09" />
+      <circle cx="292" cy="350" r="18" fill="none" stroke="#0A0A09" strokeOpacity="0.5" />
+    </svg>
+  )
+}
+
 export function Product() {
   return (
-    <section id="product" aria-labelledby="product-title" className="relative scroll-mt-16 overflow-hidden py-24 sm:py-32">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-40 top-20 h-[460px] w-[460px] rounded-full bg-cyan-500/15 blur-[130px]" />
-        <div className="absolute -left-40 bottom-0 h-[460px] w-[460px] rounded-full bg-fuchsia-500/15 blur-[130px]" />
-      </div>
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="product" aria-labelledby="product-title" className="relative scroll-mt-16 py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="product-title"
+          index="01"
           eyebrow="The product"
           title={
             <>
-              Smarter than a <span className="text-gradient">motion alarm.</span>
+              Smarter than a <em className="italic text-ember">motion alarm.</em>
             </>
           }
           lead="Spandan watches a perimeter or a danger zone with three radar nodes and an on-site AI. It reads the tiny motions of a target, like swinging limbs or spinning rotors, and tells you what it is."
         />
 
-        <ul className="reveal mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map(({ Icon, title, body, accent }) => (
-            <li key={title} className="glass rounded-3xl p-6 transition hover:-translate-y-1 hover:border-white/25">
-              <span
-                className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${accent} text-night shadow-lg`}
-              >
-                <Icon className="h-6 w-6" />
-              </span>
-              <h3 className="mt-6 font-display text-lg font-semibold leading-snug text-white">{title}</h3>
-              <p className="mt-2 leading-relaxed text-haze">{body}</p>
+        <ul className="reveal mt-16 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {features.map(({ Icon, title, body }, i) => (
+            <li key={title} className="group bg-ink p-7 transition-colors duration-300 hover:bg-coal">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-ash">{String(i + 1).padStart(2, '0')}</span>
+                <Icon className="h-6 w-6 text-ember transition-transform duration-300 group-hover:-rotate-6" />
+              </div>
+              <h3 className="mt-12 font-display text-[28px] leading-[1.05] text-paper">{title}</h3>
+              <p className="mt-3 leading-relaxed text-stone">{body}</p>
             </li>
           ))}
         </ul>
 
-        <ul className="reveal mt-5 grid gap-5 md:grid-cols-2">
+        <ul className="reveal mt-6 grid gap-6 md:grid-cols-2">
           {useCases.map(({ Icon, title, body }) => (
             <li
               key={title}
-              className="gradient-ring flex items-start gap-5 rounded-3xl bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-6 sm:p-7"
+              className="relative rounded-2xl border border-line bg-coal p-7 transition-colors duration-300 hover:border-ember/50 sm:p-9"
             >
-              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-cyan-300">
-                <Icon className="h-6 w-6" />
-              </span>
-              <div>
-                <p className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-white/55">Built for</p>
-                <h3 className="mt-1 font-display text-xl font-semibold text-white">{title}</h3>
-                <p className="mt-2 leading-relaxed text-haze">{body}</p>
-              </div>
+              <Icon className="absolute right-7 top-7 h-7 w-7 text-ember sm:right-9 sm:top-9" />
+              <p className="label">Built for</p>
+              <h3 className="mt-3 font-display text-4xl text-paper sm:text-5xl">{title}</h3>
+              <p className="mt-4 max-w-md leading-relaxed text-stone">{body}</p>
             </li>
           ))}
         </ul>
 
-        <div className="reveal relative mt-10 overflow-hidden rounded-[32px] border border-white/10 bg-gradient-to-br from-[#1B1460] via-[#2A1259] to-[#0E2A4F] p-8 sm:p-12">
-          <div aria-hidden="true" className="pointer-events-none absolute -right-28 -top-6 w-[540px] opacity-60 sm:-right-16 lg:right-0 lg:w-[600px] lg:opacity-90">
-            <PrototypeArt idPrefix="banner" className="w-full" />
+        <div className="reveal relative mt-16 overflow-hidden rounded-[28px] bg-ember p-8 text-ink sm:p-12 lg:p-16">
+          <div aria-hidden="true" className="pointer-events-none absolute -bottom-10 -right-10 h-[420px] w-[420px] sm:h-[560px] sm:w-[560px]">
+            <Rings />
           </div>
-          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#160F4A] via-[#160F4A]/85 to-transparent" />
           <div className="relative max-w-xl">
-            <p className="eyebrow-dark">Launch</p>
-            <p className="mt-5 font-display text-[40px] font-extrabold uppercase leading-[1.02] tracking-tight sm:text-6xl">
-              <span className="text-gradient animate-gradient-x">Coming soon</span>
+            <p className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-ink/70">Launch</p>
+            <p className="mt-4 font-display text-[64px] italic leading-[0.9] sm:text-8xl">Coming soon.</p>
+            <p className="mt-6 text-lg leading-relaxed text-ink/80">
+              <span className="font-semibold text-ink">Spandan</span>, our multistatic radar with micro-motion analysis, is
+              being built and tested in Jharkhand. Want to know when it launches, or talk about a pilot? Reach the founders
+              directly.
             </p>
-            <p className="mt-5 text-lg leading-relaxed text-white/85">
-              <span className="font-bold text-white">Spandan</span>, our multistatic radar with micro-motion analysis, is
-              being built and tested in Jharkhand. Want to know when it launches, or talk about a pilot? Reach the
-              founders directly.
-            </p>
-            <ScrollButton to="contact" className="btn-primary mt-8">
+            <ScrollButton
+              to="contact"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[15px] font-semibold text-paper transition-colors duration-300 hover:bg-coal"
+            >
               Contact the founders <ArrowIcon className="h-4 w-4" />
             </ScrollButton>
           </div>

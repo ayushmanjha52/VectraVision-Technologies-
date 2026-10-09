@@ -1,72 +1,61 @@
 import { SectionHeading } from '@/components/SectionHeading'
 import { backing } from '@/content/site'
 
-function Badge({ name, detail, mark, size }: { name: string; detail: string; mark: string; size: 'lg' | 'sm' }) {
+type Item = { name: string; detail: string; mark: string }
+
+function Group({ title, items, size }: { title: string; items: Item[]; size: 'lg' | 'sm' }) {
   const large = size === 'lg'
-  const markText = mark.length > 3 ? 'text-[11px]' : large ? 'text-base' : 'text-sm'
   return (
-    <li
-      className={`flex items-center gap-4 rounded-3xl border border-violet-200/70 bg-white shadow-[0_24px_50px_-24px_rgba(91,33,182,0.45)] transition hover:-translate-y-1 ${
-        large ? 'p-6 sm:p-7' : 'p-5'
-      }`}
-    >
-      <span
-        className={`flex shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 via-violet-600 to-pink-500 font-display font-bold text-white ${
-          large ? 'h-16 w-16' : 'h-12 w-12'
-        } ${markText}`}
-      >
-        {mark}
-      </span>
-      <span className="min-w-0">
-        <span
-          className={`block whitespace-nowrap font-display font-semibold text-ink ${
-            large ? 'text-xl lg:text-2xl' : 'text-[15px] xl:text-lg'
-          }`}
-        >
-          {name}
-        </span>
-        <span className="mt-1 block text-slate-600">{detail}</span>
-      </span>
-    </li>
+    <div className="grid gap-4 lg:grid-cols-12 lg:gap-8">
+      <p className="label pt-7 lg:col-span-3">{title}</p>
+      <ul className="border-t border-line lg:col-span-9">
+        {items.map((item) => (
+          <li
+            key={item.name}
+            className={`group flex items-center justify-between gap-6 border-b border-line ${large ? 'py-7 sm:py-8' : 'py-5 sm:py-6'}`}
+          >
+            <span className="flex min-w-0 items-center gap-5">
+              <span
+                className={`flex shrink-0 items-center justify-center rounded-full border border-ember/50 font-mono font-medium text-ember transition-colors duration-300 group-hover:bg-ember group-hover:text-ink ${
+                  large ? 'h-14 w-14 text-sm' : 'h-11 w-11 text-[10px]'
+                }`}
+              >
+                {item.mark}
+              </span>
+              <span className="min-w-0 transition-transform duration-300 group-hover:translate-x-1.5">
+                <span className={`block font-display leading-none text-paper ${large ? 'text-4xl sm:text-6xl' : 'text-3xl sm:text-4xl'}`}>
+                  {item.name}
+                </span>
+                <span className="mt-2 block text-sm text-stone sm:hidden">{item.detail}</span>
+              </span>
+            </span>
+            <span className="hidden shrink-0 text-right text-stone sm:block">{item.detail}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
 export function Backing() {
   return (
-    <section id="backing" aria-labelledby="backing-title" className="relative scroll-mt-16 overflow-hidden bg-mist py-24 text-ink sm:py-28">
-      <div aria-hidden="true" className="dot-bg absolute inset-0" />
-      <div aria-hidden="true" className="absolute -top-36 left-1/2 h-72 w-[760px] -translate-x-1/2 rounded-full bg-violet-400/30 blur-[110px]" />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="backing" aria-labelledby="backing-title" className="relative scroll-mt-16 py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           id="backing-title"
-          tone="light"
-          align="center"
+          index="03"
           eyebrow="Backed and recognised"
           title={
             <>
-              Backed by{' '}
-              <span className="bg-gradient-to-r from-cyan-600 via-violet-600 to-pink-600 bg-clip-text text-transparent">
-                TEXMiN and BIT Sindri
-              </span>
+              Backed by <em className="italic text-ember">TEXMiN</em> and <em className="italic text-ember">BIT Sindri.</em>
             </>
           }
         />
 
-        <ul className="reveal mx-auto mt-12 grid max-w-md gap-5 md:max-w-4xl md:grid-cols-2">
-          {backing.backedBy.map((item) => (
-            <Badge key={item.name} {...item} size="lg" />
-          ))}
-        </ul>
-
-        <p className="mt-14 text-center font-mono text-xs font-medium uppercase tracking-[0.2em] text-slate-500">
-          Recognised by
-        </p>
-        <ul className="reveal mx-auto mt-6 grid max-w-md gap-5 lg:max-w-6xl lg:grid-cols-3">
-          {backing.recognisedBy.map((item) => (
-            <Badge key={item.name} {...item} size="sm" />
-          ))}
-        </ul>
+        <div className="reveal mt-16 space-y-14">
+          <Group title="Backed by" items={backing.backedBy} size="lg" />
+          <Group title="Recognised by" items={backing.recognisedBy} size="sm" />
+        </div>
       </div>
     </section>
   )
